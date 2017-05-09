@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta name="viewport">
+    <title>Title</title>
+    <link href="css.css" rel="stylesheet" type="text/css">
+<link href="h1.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h1 id="Demo" class="h1"> HelloWord</h1>
+<script>function show() {
+    show1()
+
+}</script>
+<button onclick="show()">click</button>
+<script >
+    function setupWebViewJavascriptBridge(callback) {
+        if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
+        if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
+        window.WVJBCallbacks = [callback];
+        var WVJBIframe = document.createElement('iframe');
+        WVJBIframe.style.display = 'none';
+        WVJBIframe.src = 'wvjbscheme://__BRIDGE_LOADED__';
+        document.documentElement.appendChild(WVJBIframe);
+        setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
+      }
+      setupWebViewJavascriptBridge(function(bridge){
+          bridge.registerHandler('myron',function(data, response){
+              x=document.getElementById("Demo");
+              x.innerHTML=data;
+              response('success');
+      })
+                                   })                    
+    function show1() {
+        WebViewJavascriptBridge.callHandler('update',{'name':'mryon'},function responseCallback(responseData){
+           alert(responseData);
+        })
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+platform :ios, '7.0'
+
+target “WebView” do
+	pod 'AFNetworking'
+	pod 'WebViewJavascriptBridge'
+end
